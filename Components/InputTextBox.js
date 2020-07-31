@@ -73,6 +73,8 @@ export default InputTextBox = React.forwardRef((props, ref) => {
               }}
             >
               <TextInput
+                editable={props.editable}
+                keyboardType={props.keyboardType}
                 onChangeText={(e) => {
                   props.textHandler(e);
                 }}

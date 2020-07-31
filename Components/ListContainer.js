@@ -6,30 +6,20 @@ import { ScrollView } from "react-native-gesture-handler";
 
 const ListContainer = (props) => {
   return (
-    <View style={{ margin: 30 }}>
+    <View style={{ marginHorizontal: 30, marginTop: 30 }}>
       <View>
         <Text
           style={{
             fontSize: 20,
-
             fontFamily: "Sora-Medium",
           }}
         >
-          Items
+          {props.title}
         </Text>
       </View>
-      <ScrollView style={{ marginVertical: 10, maxHeight: "75%" }}>
+      <ScrollView style={{ marginVertical: 10, maxHeight: "90%" }}>
         {props.children}
       </ScrollView>
-      <View
-        style={{
-          width: "100%",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <AnimatedButton color={"#a6e3e9"} title={"Next"} />
-      </View>
     </View>
   );
 };

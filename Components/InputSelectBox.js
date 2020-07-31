@@ -33,10 +33,11 @@ const InputSelectBox = (props) => {
     >
       <TouchableNativeFeedback
         delayPressIn={0}
-        onPressIn={props.click}
+        delayPressOut={0}
+        onPress={props.click}
         style={{ zIndex: 5 }}
         useForeground={false}
-        background={TouchableNativeFeedback.Ripple("#364f6b", true)}
+        background={TouchableNativeFeedback.SelectableBackground()}
       >
         <View
           style={{

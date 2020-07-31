@@ -8,7 +8,8 @@ const ListItem = (props) => {
   return (
     <TouchableWithoutFeedback
       delayPressIn={0}
-      onPressIn={() => {
+      delayPressOut={0}
+      onPress={() => {
         const obj = { activeItem: props.itemName, activeId: props.id };
         props.click(obj);
       }}

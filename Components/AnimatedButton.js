@@ -1,9 +1,14 @@
+import {
+  Animated,
+  StyleSheet,
+  Text,
+  TouchableNativeFeedback,
+  View,
+} from "react-native";
 import React, { useRef } from "react";
-import { StyleSheet, Text, View, Animated } from "react-native";
-import { TouchableNativeFeedback } from "react-native-gesture-handler";
-import Values from "../Assets/shortcut";
 
 import MyAnimation from "../Assets/Animations";
+import Values from "../Assets/shortcut";
 
 export default function AnimatedButton(props) {
   const scalAnim = useRef(new Animated.Value(1)).current;
@@ -36,8 +41,6 @@ export default function AnimatedButton(props) {
       ]}
     >
       <TouchableNativeFeedback
-        onPressIn={_start}
-        onPressOut={_stop}
         onPress={props.click}
         useForeground={false}
         background={TouchableNativeFeedback.Ripple(props.ripple, true)}
