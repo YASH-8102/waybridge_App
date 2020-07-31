@@ -1,3 +1,5 @@
+import "react-native-get-random-values";
+
 import {
   Animated,
   Dimensions,
@@ -12,192 +14,28 @@ import {
 } from "react-native";
 import React, { createRef, useRef, useState } from "react";
 
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-imp;
+import BgMask from "../Components/BgMask";
+import CardContainer from "../Components/CardContainer";
+import Header from "../Components/Header";
+import InputSelectBox from "../Components/InputSelectBox";
+import InputTextBox from "../Components/InputTextBox";
+import ListContainer from "../Components/ListContainer";
+import ListItem from "../Components/ListItem";
+import { v1 as uuidv1 } from "uuid";
 
-const InputSelectBox = (props) => {
-  const scalAnim = useRef(new Animated.Value(1)).current;
-
-  return (
-    <Animated.View
-      style={[
-        {
-          flex: 1,
-          height: 65,
-          borderRadius: 5,
-          marginVertical: 5,
-        },
-        {
-          transform: [
-            {
-              scale: scalAnim,
-            },
-          ],
-        },
-      ]}
-    >
-      <TouchableNativeFeedback
-        delayPressIn={0}
-        onPress={props.click}
-        style={{ zIndex: 5 }}
-        useForeground={false}
-        background={TouchableNativeFeedback.Ripple("#364f6b", true)}
-      >
-        <View
-          style={{
-            height: 65,
-            backgroundColor: "rgba(255, 255, 255,0.5)",
-            borderRadius: 5,
-            borderBottomWidth: 2,
-            borderBottomColor: "rgba(0, 0, 0,0.3)",
-            flexDirection: "row",
-            paddingLeft: 20,
-            zIndex: 5,
-          }}
-        >
-          <View
-            style={{
-              width: "80%",
-              height: "100%",
-              justifyContent: "center",
-              alignItems: "flex-start",
-            }}
-          >
-            <View
-              style={{
-                width: "100%",
-                height: "30%",
-                justifyContent: "center",
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 13,
-                  fontFamily: "Sora-Bold",
-                  color: "rgba(54, 79, 107,0.7)",
-                }}
-              >
-                {props.title}
-              </Text>
-            </View>
-            <View
-              style={{
-                width: "100%",
-                height: "50%",
-                justifyContent: "center",
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 16,
-                  fontFamily: "Sora-Regular",
-                  color: "rgba(54, 79, 107,1)",
-                }}
-              >
-                {props.subtitle}
-              </Text>
-            </View>
-          </View>
-          <View
-            style={{
-              width: "20%",
-              height: "100%",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <MaterialIcons name="arrow-drop-down" size={50} color={"#364f6b"} />
-          </View>
-        </View>
-      </TouchableNativeFeedback>
-    </Animated.View>
-  );
-};
-const InputTextBox = React.forwardRef((props, ref) => {
-  const scalAnim = useRef(new Animated.Value(1)).current;
-  return (
-    <Animated.View
-      style={[
-        {
-          flex: 1,
-          height: 65,
-          borderRadius: 5,
-          marginVertical: 5,
-        },
-        {
-          transform: [
-            {
-              scale: scalAnim,
-            },
-          ],
-        },
-      ]}
-    >
-      <TouchableWithoutFeedback onPress={props.click}>
-        <View
-          style={{
-            height: 65,
-            backgroundColor: "rgba(255, 255, 255,0.5)",
-            borderRadius: 5,
-            borderBottomWidth: 2,
-            borderBottomColor: "rgba(0, 0, 0,0.3)",
-            flexDirection: "row",
-            paddingLeft: 20,
-          }}
-        >
-          <View
-            style={{
-              width: "100%",
-              height: "100%",
-              justifyContent: "center",
-              alignItems: "flex-start",
-            }}
-          >
-            <View
-              style={{
-                width: "100%",
-                height: "30%",
-                justifyContent: "center",
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 13,
-                  fontFamily: "Sora-Bold",
-                  color: "rgba(54, 79, 107,0.7)",
-                }}
-              >
-                {props.title}
-              </Text>
-            </View>
-            <View
-              style={{
-                width: "100%",
-                height: "50%",
-                justifyContent: "center",
-              }}
-            >
-              <TextInput
-                ref={ref}
-                onSubmitEditing={props.onSubmitEditing}
-                blurOnSubmit={props.blurOnSubmit}
-                returnKeyType={props.returnKeyType}
-                placeholder={props.subtitle}
-                style={{
-                  margin: 0,
-                  padding: 0,
-                  fontSize: 16,
-                  fontFamily: "Sora-Medium",
-                  color: "rgba(54, 79, 107,0.7)",
-                }}
-              />
-            </View>
-          </View>
-        </View>
-      </TouchableWithoutFeedback>
-    </Animated.View>
-  );
-});
+const Items = [
+  { name: "Bhangar", id: uuidv1() },
+  { name: "yash", id: uuidv1() },
+  { name: "ug", id: uuidv1() },
+  { name: "Bhangar", id: uuidv1() },
+  { name: "yash", id: uuidv1() },
+  { name: "ug", id: uuidv1() },
+  { name: "Bhangar", id: uuidv1() },
+  { name: "yash", id: uuidv1() },
+  { name: "ug", id: uuidv1() },
+  { name: "Bhangar", id: uuidv1() },
+  { name: "yash", id: uuidv1() },
+];
 export default function Home() {
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
@@ -213,8 +51,44 @@ export default function Home() {
   const [Cashior, setCashior] = useState("Select-one");
   const ref1 = createRef();
   const ref2 = createRef();
+  const Grossref = createRef();
+  const Tareref = createRef();
+  const Netref = createRef();
+  const [ScrollRef, setScrollRef] = useState(null);
   const [modelVisible, setmodelVisible] = useState(false);
-  const purchaserHandler = (e) => {};
+  const [activeId, setactiveId] = useState(null);
+
+  const sellerHandler = (e) => {
+    setSeller(e);
+  };
+  const purchaserHandler = (e) => {
+    setPurchaser(e);
+  };
+  const itemHandler = (e) => {
+    setitems(e);
+  };
+  const vehicleHandler = (e) => {
+    setVehicle(e);
+  };
+  const grossHandler = (e) => {
+    setGross(e);
+  };
+  const tareHandler = (e) => {
+    setTare(e);
+  };
+  const netHandler = (e) => {
+    setNet(Gross + Tare);
+  };
+  const chargeHandler = (e) => {
+    setCharge(e);
+  };
+  const typeHandler = (e) => {
+    setType(e);
+  };
+  const cashiorHandler = (e) => {
+    setCashior(e);
+  };
+
   const upanim = useRef(new Animated.Value(0)).current;
   const fade = useRef(new Animated.Value(0)).current;
 
@@ -251,29 +125,18 @@ export default function Home() {
   return (
     <>
       {modelVisible ? (
-        <TouchableWithoutFeedback
-          onPress={() => {
+        <BgMask
+          fade={fade}
+          press={() => {
             stopAnim();
-            console.log("yn");
           }}
-        >
-          <Animated.View
-            style={{
-              zIndex: 2,
-              height: "100%",
-              width: "100%",
-              backgroundColor: "rgba(0,0,0,0.2)",
-              position: "absolute",
-              opacity: fade,
-            }}
-          ></Animated.View>
-        </TouchableWithoutFeedback>
+        />
       ) : null}
       <Animated.View
         style={{
           position: "absolute",
           width: "100%",
-          maxHeight: windowHeight * 0.6,
+          height: windowHeight * 0.6,
           bottom: -windowHeight * 0.6,
           zIndex: 500,
           backgroundColor: "rgba(255,255,255,1)",
@@ -282,62 +145,39 @@ export default function Home() {
           borderTopStartRadius: 30,
           elevation: 10,
         }}
-      />
-      <ScrollView>
+      >
+        <ListContainer>
+          {Items.map(({ name, id }) => {
+            return (
+              <ListItem
+                itemName={name}
+                activeId={activeId}
+                id={id}
+                key={id}
+                click={(obj) => {
+                  setactiveId(obj.activeId);
+                }}
+              />
+            );
+          })}
+        </ListContainer>
+      </Animated.View>
+      <ScrollView
+        ref={(scroller) => {
+          setScrollRef(scroller);
+        }}
+      >
         <View
           style={{
             width: "100%",
             height: "100%",
-            backgroundColor: "#`f5f5f5`",
+            backgroundColor: "#f5f5f5",
             justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <View
-            style={{
-              width: "100%",
-              paddingHorizontal: 30,
-              paddingVertical: 15,
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <View>
-              <Text
-                style={{
-                  fontSize: 16,
-                  fontFamily: "Sora-Medium",
-                  color: "rgba(54, 79, 107,1)",
-                }}
-              >
-                Serial No. : 1236
-              </Text>
-            </View>
-            <View>
-              <Text
-                style={{
-                  fontSize: 16,
-                  fontFamily: "Sora-Medium",
-                  color: "rgba(54, 79, 107,1)",
-                }}
-              >
-                Date : 10/8/2020
-              </Text>
-            </View>
-          </View>
-
-          <View
-            style={{
-              width: "90%",
-              backgroundColor: "#a6e3e9",
-              elevation: 3,
-              borderRadius: 10,
-              marginVertical: 10,
-              padding: 10,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+          <Header />
+          <CardContainer color={"#a6e3e9"}>
             <InputTextBox
               returnKeyType={"next"}
               blurOnSubmit={false}
@@ -351,8 +191,6 @@ export default function Home() {
             <InputTextBox
               title="purchaser"
               subtitle={Purchaser}
-              isTextInput={true}
-              textHandler={purchaserHandler}
               ref={ref2}
               next={() => {}}
             />
@@ -364,49 +202,48 @@ export default function Home() {
               title="Items"
               subtitle={items}
             />
-            <InputSelectBox
-              onPress={() => {
-                console.log("veh");
+            <InputSelectBox title="Vehicle-name" subtitle={Vehicle} />
+          </CardContainer>
+
+          <CardContainer color={"#bbded6"}>
+            <InputTextBox
+              textHandler={}
+              title="Gross"
+              subtitle={Gross.toString()}
+              returnKeyType={"next"}
+              blurOnSubmit={false}
+              ref={Grossref}
+              onSubmitEditing={() => {
+                ScrollRef.scrollTo({ y: 160, animated: true });
+                Tareref.current.focus();
               }}
-              title="Vehicle-name"
-              subtitle={Vehicle}
             />
-          </View>
-
-          <View
-            style={{
-              width: "90%",
-              backgroundColor: "#bbded6",
-
-              elevation: 3,
-              borderRadius: 10,
-              marginVertical: 10,
-              padding: 10,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <InputSelectBox title={"Gross"} subtitle={Gross} />
-            <InputSelectBox title={"Tare"} subtitle={Tare} />
-            <InputSelectBox title={"Net"} subtitle={Net} />
-          </View>
-          <View
-            style={{
-              width: "90%",
-              backgroundColor: "#fae3d9",
-
-              elevation: 3,
-              borderRadius: 10,
-              marginVertical: 10,
-              padding: 10,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+            <InputTextBox
+              title="Tare"
+              subtitle={Tare.toString()}
+              isTextInput={true}
+              ref={Tareref}
+              returnKeyType={"next"}
+              blurOnSubmit={false}
+              onSubmitEditing={() => {
+                Netref.current.focus();
+              }}
+            />
+            <InputTextBox
+              title="Net"
+              subtitle={Net.toString()}
+              isTextInput={true}
+              returnKeyType={"next"}
+              blurOnSubmit={true}
+              ref={Netref}
+              onSubmitEditing={() => {}}
+            />
+          </CardContainer>
+          <CardContainer color={"#fae3d9"}>
             <InputSelectBox title={"Charge"} subtitle={Charge} />
             <InputSelectBox title={"Type"} subtitle={Type} />
             <InputSelectBox title={"Cashior"} subtitle={Cashior} />
-          </View>
+          </CardContainer>
         </View>
       </ScrollView>
     </>
