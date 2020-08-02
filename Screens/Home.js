@@ -265,6 +265,11 @@ export default function Home() {
   };
   return (
     <>
+      <Modal visible={true}>
+        <View>
+          <Text>{getData()}</Text>
+        </View>
+      </Modal>
       {modelVisible ? (
         <BgMask
           fade={fade}
@@ -403,7 +408,7 @@ export default function Home() {
               blurOnSubmit={false}
               ref={Grossref}
               onSubmitEditing={() => {
-                ScrollRef.scrollTo({ y: 160, animated: true });
+                ScrollRef.scrollTo({ y: 240, animated: true });
                 Tareref.current.focus();
               }}
             />
