@@ -86,8 +86,8 @@ const InputSelectBox = (props) => {
               <Text
                 style={{
                   fontSize: 16,
-                  fontFamily: "Sora-Regular",
-                  color: "rgba(54, 79, 107,1)",
+                  fontFamily: "Sora-Medium",
+                  color: "rgba(0,0,0,0.4)",
                 }}
               >
                 {props.subtitle}

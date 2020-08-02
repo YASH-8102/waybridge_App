@@ -23,6 +23,7 @@ import InputSelectBox from "../Components/InputSelectBox";
 import InputTextBox from "../Components/InputTextBox";
 import ListContainer from "../Components/ListContainer";
 import ListItem from "../Components/ListItem";
+import { log } from "react-native-reanimated";
 import { v1 as uuidv1 } from "uuid";
 
 const Items = [
@@ -68,15 +69,15 @@ const Cashiors = [
 export default function Home() {
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
-  const [seller, setSeller] = useState("Select-One");
-  const [Purchaser, setPurchaser] = useState("yn");
+  const [seller, setSeller] = useState("Enter Seller Name");
+  const [Purchaser, setPurchaser] = useState("Enter Purchaser Name");
   const [items, setitems] = useState("Select-one");
   const [Vehicle, setVehicle] = useState("Select-one");
   const [Gross, setGross] = useState(0);
   const [Tare, setTare] = useState(0);
   const [Net, setNet] = useState(Gross - Tare);
   const [Charge, setCharge] = useState(0);
-  const [Type, setType] = useState(null);
+  const [Type, setType] = useState("Select-one");
   const [Cashior, setCashior] = useState("Select-one");
   const ref1 = createRef();
   const ref2 = createRef();
@@ -123,26 +124,55 @@ export default function Home() {
     setCashior(e);
   };
 
+  const getData = () => {
+    const obj = {
+      Seller: seller,
+      Purchaser: Purchaser,
+      Item: items,
+      Vehicle: Vehicle,
+      Gross: Gross,
+      Tare: Tare,
+      Net: Net,
+      Charge: Charge,
+      Type: Type,
+      Cashior: Cashior,
+    };
+    return obj;
+  };
+
+  const setStates = ({ activeItem }) => {
+    switch (activeTab) {
+      case "_Items":
+        setitems(activeItem);
+        break;
+      case "_Vehicles":
+        setVehicle(activeItem);
+        break;
+
+      case "_Charges":
+        setCharge(activeItem);
+        break;
+      case "_Types":
+        setType(activeItem);
+        break;
+      case "_Cashior":
+        setCashior(activeItem);
+        break;
+
+      default:
+        break;
+    }
+  };
+
   const JumpToNext = () => {
     switch (activeTab) {
-      case "_Seller":
-        setactiveTab("_Purchaser");
-        break;
-      case "_Purchaser":
-        setactiveTab("_Items");
-        break;
       case "_Items":
         setactiveTab("_Vehicles");
         break;
       case "_Vehicles":
         setactiveTab("_Gross");
         break;
-      case "_Gross":
-        setactiveTab("_Tare");
-        break;
-      case "_Tare":
-        setactiveTab("_Charges");
-        break;
+
       case "_Charges":
         setactiveTab("_Types");
         break;
@@ -150,9 +180,9 @@ export default function Home() {
         setactiveTab("_Cashior");
         break;
       case "_Cashior":
+        setpopupList(null);
         stopAnim();
         setactiveTab(null);
-
         break;
 
       default:
@@ -162,12 +192,6 @@ export default function Home() {
   useEffect(() => {
     console.log(activeTab);
     switch (activeTab) {
-      case "_Seller":
-        ref1.current.focus();
-        break;
-      case "_Purchaser":
-        ref2.current.focus();
-        break;
       case "_Items":
         startAnim();
         setpopupList(Items);
@@ -180,10 +204,7 @@ export default function Home() {
         stopAnim();
         Grossref.current.focus();
         break;
-      case "_Tare":
-        stopAnim();
-        Tareref.current.focus();
-        break;
+
       case "_Charges":
         startAnim();
         setpopupList(Charges);
@@ -198,7 +219,6 @@ export default function Home() {
         break;
 
       default:
-        setpopupList(null);
         break;
     }
   }, [activeTab, modelVisible]);
@@ -231,12 +251,12 @@ export default function Home() {
     Animated.parallel([
       Animated.timing(fade, {
         toValue: 0,
-        duration: 100,
+        duration: 200,
         useNativeDriver: true,
       }),
       Animated.timing(upanim, {
         toValue: 0,
-        duration: 100,
+        duration: 200,
         useNativeDriver: true,
       }),
     ]).start(() => {
@@ -279,6 +299,8 @@ export default function Home() {
                       id={id}
                       key={id}
                       click={(obj) => {
+                        console.log(obj);
+                        setStates(obj);
                         setactiveId(obj.activeId);
                       }}
                     />
@@ -300,20 +322,6 @@ export default function Home() {
                   setpopupList(null);
                   console.log(activeTab);
                   JumpToNext();
-                  // if (activeTab === "Items") {
-                  //   setpopupList(null);
-                  //   setactiveTab("Vehicle");
-                  // } else if (activeTab === "Vehicle") {
-                  //   setpopupList(null);
-                  //   stopAnim();
-                  //   Grossref.current.focus();
-                  // } else if (activeTab === "Charges") {
-                  //   setpopupList(null);
-                  //   setactiveTab("Types");
-                  // } else if (activeTab === "Types") {
-                  //   setpopupList(null);
-                  //   setactiveTab("Cashior");
-                  // }
                 }}
                 color={"#a6e3e9"}
                 title={"Next"}
@@ -350,18 +358,20 @@ export default function Home() {
           <Header />
           <CardContainer color={"#a6e3e9"}>
             <InputTextBox
+              textHandler={sellerHandler}
               returnKeyType={"next"}
               blurOnSubmit={false}
               title="Seller"
-              subtitle={seller}
+              subtitle={"Enter Name"}
               ref={ref1}
               onSubmitEditing={() => {
-                setactiveTab("_Purchaser");
+                ref2.current.focus();
               }}
             />
             <InputTextBox
+              textHandler={purchaserHandler}
               title="purchaser"
-              subtitle={Purchaser}
+              subtitle={"Enter Name"}
               ref={ref2}
               onSubmitEditing={() => {
                 setactiveTab("_Items");
@@ -394,7 +404,7 @@ export default function Home() {
               ref={Grossref}
               onSubmitEditing={() => {
                 ScrollRef.scrollTo({ y: 160, animated: true });
-                setactiveTab("_Tare");
+                Tareref.current.focus();
               }}
             />
             <InputTextBox
@@ -439,6 +449,25 @@ export default function Home() {
               subtitle={Cashior}
             />
           </CardContainer>
+          <View
+            style={{
+              marginBottom: 10,
+              width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <AnimatedButton
+              click={() => {
+                console.log(getData());
+              }}
+              width={"80%"}
+              color={"rgba(54, 79, 107,0.7)"}
+              title={"Next"}
+              textcolor={"#FFF"}
+              ripple={"rgba(255,255,255,0.1)"}
+            />
+          </View>
         </View>
       </ScrollView>
     </>

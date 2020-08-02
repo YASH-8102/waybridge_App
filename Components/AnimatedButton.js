@@ -13,13 +13,6 @@ import Values from "../Assets/shortcut";
 export default function AnimatedButton(props) {
   const scalAnim = useRef(new Animated.Value(1)).current;
 
-  const _start = () => {
-    MyAnimation(scalAnim, 0.95, 100).start();
-  };
-  const _stop = () => {
-    MyAnimation(scalAnim, 1, 100).start();
-  };
-
   return (
     <Animated.View
       style={[
@@ -41,6 +34,8 @@ export default function AnimatedButton(props) {
       ]}
     >
       <TouchableNativeFeedback
+        delayPressIn={0}
+        delayPressOut={0}
         onPress={props.click}
         useForeground={false}
         background={TouchableNativeFeedback.Ripple(props.ripple, true)}
@@ -54,7 +49,7 @@ export default function AnimatedButton(props) {
         >
           <Text
             style={{
-              fontFamily: "yn",
+              fontFamily: "Sora-Regular",
               fontSize: 22,
               color: props.textcolor,
               textAlign: "center",
