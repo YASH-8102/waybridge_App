@@ -50,7 +50,7 @@ export default function AnimatedButton(props) {
           <Text
             style={{
               fontFamily: "Sora-Regular",
-              fontSize: 22,
+              fontSize: 18,
               color: props.textcolor,
               textAlign: "center",
             }}

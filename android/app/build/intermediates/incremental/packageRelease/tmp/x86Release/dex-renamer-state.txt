@@ -1,4 +1,4 @@
-#Sat Aug 01 02:23:52 IST 2020
+#Sun Aug 02 23:33:18 IST 2020
 base.0=/home/yash/Documents/projects/jalaram_waybridge/android/app/build/intermediates/transforms/r8/release/0/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

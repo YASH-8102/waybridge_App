@@ -4,9 +4,7 @@ ADDED from /home/yash/Documents/projects/jalaram_waybridge/android/app/src/main/
 INJECTED from /home/yash/Documents/projects/jalaram_waybridge/android/app/src/main/AndroidManifest.xml:1:1-29:12
 INJECTED from /home/yash/Documents/projects/jalaram_waybridge/android/app/src/main/AndroidManifest.xml:1:1-29:12
 INJECTED from /home/yash/Documents/projects/jalaram_waybridge/android/app/src/main/AndroidManifest.xml:1:1-29:12
-MERGED from [:react-native-community_datetimepicker] /home/yash/Documents/projects/jalaram_waybridge/node_modules/@react-native-community/datetimepicker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:2:1-13:12
 MERGED from [:react-native-community_masked-view] /home/yash/Documents/projects/jalaram_waybridge/node_modules/@react-native-community/masked-view/android/build/intermediates/library_manifest/release/AndroidManifest.xml:2:1-9:12
-MERGED from [:react-native-fs] /home/yash/Documents/projects/jalaram_waybridge/node_modules/react-native-fs/android/build/intermediates/library_manifest/release/AndroidManifest.xml:2:1-13:12
 MERGED from [:react-native-gesture-handler] /home/yash/Documents/projects/jalaram_waybridge/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/release/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-get-random-values] /home/yash/Documents/projects/jalaram_waybridge/node_modules/react-native-get-random-values/android/build/intermediates/library_manifest/release/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-reanimated] /home/yash/Documents/projects/jalaram_waybridge/node_modules/react-native-reanimated/android/build/intermediates/library_manifest/release/AndroidManifest.xml:2:1-11:12
@@ -77,8 +75,6 @@ ADDED from /home/yash/Documents/projects/jalaram_waybridge/android/app/src/main/
 		ADDED from /home/yash/Documents/projects/jalaram_waybridge/android/app/src/main/AndroidManifest.xml:4:22-64
 application
 ADDED from /home/yash/Documents/projects/jalaram_waybridge/android/app/src/main/AndroidManifest.xml:6:5-27:19
-MERGED from [:react-native-community_datetimepicker] /home/yash/Documents/projects/jalaram_waybridge/node_modules/@react-native-community/datetimepicker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:11:5-20
-MERGED from [:react-native-community_datetimepicker] /home/yash/Documents/projects/jalaram_waybridge/node_modules/@react-native-community/datetimepicker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:11:5-20
 MERGED from [com.facebook.react:react-native:0.63.1] /home/yash/.gradle/caches/transforms-2/files-2.1/557ed9b29e158ffe358cb554f1b58ef7/jetified-react-native-0.63.1/AndroidManifest.xml:11:5-20
 MERGED from [com.facebook.react:react-native:0.63.1] /home/yash/.gradle/caches/transforms-2/files-2.1/557ed9b29e158ffe358cb554f1b58ef7/jetified-react-native-0.63.1/AndroidManifest.xml:11:5-20
 MERGED from [com.google.android.material:material:1.1.0] /home/yash/.gradle/caches/transforms-2/files-2.1/863e0c3c6716935cd3657ad638fd992d/material-1.1.0/AndroidManifest.xml:22:5-20
@@ -137,12 +133,8 @@ uses-sdk
 INJECTED from /home/yash/Documents/projects/jalaram_waybridge/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/yash/Documents/projects/jalaram_waybridge/android/app/src/main/AndroidManifest.xml
 INJECTED from /home/yash/Documents/projects/jalaram_waybridge/android/app/src/main/AndroidManifest.xml
-MERGED from [:react-native-community_datetimepicker] /home/yash/Documents/projects/jalaram_waybridge/node_modules/@react-native-community/datetimepicker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-community_datetimepicker] /home/yash/Documents/projects/jalaram_waybridge/node_modules/@react-native-community/datetimepicker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-community_masked-view] /home/yash/Documents/projects/jalaram_waybridge/node_modules/@react-native-community/masked-view/android/build/intermediates/library_manifest/release/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-community_masked-view] /home/yash/Documents/projects/jalaram_waybridge/node_modules/@react-native-community/masked-view/android/build/intermediates/library_manifest/release/AndroidManifest.xml:5:5-7:41
-MERGED from [:react-native-fs] /home/yash/Documents/projects/jalaram_waybridge/node_modules/react-native-fs/android/build/intermediates/library_manifest/release/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-fs] /home/yash/Documents/projects/jalaram_waybridge/node_modules/react-native-fs/android/build/intermediates/library_manifest/release/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-gesture-handler] /home/yash/Documents/projects/jalaram_waybridge/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/release/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-gesture-handler] /home/yash/Documents/projects/jalaram_waybridge/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/release/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-get-random-values] /home/yash/Documents/projects/jalaram_waybridge/node_modules/react-native-get-random-values/android/build/intermediates/library_manifest/release/AndroidManifest.xml:7:5-9:41
@@ -247,7 +239,3 @@ INJECTED from /home/yash/Documents/projects/jalaram_waybridge/android/app/src/ma
 		INJECTED from /home/yash/Documents/projects/jalaram_waybridge/android/app/src/main/AndroidManifest.xml
 		ADDED from /home/yash/Documents/projects/jalaram_waybridge/android/app/src/main/AndroidManifest.xml
 		INJECTED from /home/yash/Documents/projects/jalaram_waybridge/android/app/src/main/AndroidManifest.xml
-uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from [:react-native-fs] /home/yash/Documents/projects/jalaram_waybridge/node_modules/react-native-fs/android/build/intermediates/library_manifest/release/AndroidManifest.xml:11:5-81
-	android:name
-		ADDED from [:react-native-fs] /home/yash/Documents/projects/jalaram_waybridge/node_modules/react-native-fs/android/build/intermediates/library_manifest/release/AndroidManifest.xml:11:22-78

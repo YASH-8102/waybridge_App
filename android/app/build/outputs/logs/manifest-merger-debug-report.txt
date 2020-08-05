@@ -8,10 +8,7 @@ MERGED from /home/yash/Documents/projects/jalaram_waybridge/android/app/src/main
 MERGED from [com.facebook.flipper:flipper:0.37.0] /home/yash/.gradle/caches/transforms-2/files-2.1/623174cd4892d9fb924ac44b102b25c0/flipper-0.37.0/AndroidManifest.xml:8:1-18:12
 MERGED from [com.facebook.flipper:flipper-network-plugin:0.37.0] /home/yash/.gradle/caches/transforms-2/files-2.1/a65d6076e19ec393c728e4dca49568f4/flipper-network-plugin-0.37.0/AndroidManifest.xml:8:1-15:12
 MERGED from [com.facebook.flipper:flipper-fresco-plugin:0.37.0] /home/yash/.gradle/caches/transforms-2/files-2.1/4c2d2364c35e2c493fd776ce36e653fa/flipper-fresco-plugin-0.37.0/AndroidManifest.xml:8:1-15:12
-MERGED from [:react-native-community_async-storage] /home/yash/Documents/projects/jalaram_waybridge/node_modules/@react-native-community/async-storage/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-9:12
-MERGED from [:react-native-community_datetimepicker] /home/yash/Documents/projects/jalaram_waybridge/node_modules/@react-native-community/datetimepicker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-13:12
 MERGED from [:react-native-community_masked-view] /home/yash/Documents/projects/jalaram_waybridge/node_modules/@react-native-community/masked-view/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-9:12
-MERGED from [:react-native-fs] /home/yash/Documents/projects/jalaram_waybridge/node_modules/react-native-fs/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-13:12
 MERGED from [:react-native-gesture-handler] /home/yash/Documents/projects/jalaram_waybridge/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-get-random-values] /home/yash/Documents/projects/jalaram_waybridge/node_modules/react-native-get-random-values/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-reanimated] /home/yash/Documents/projects/jalaram_waybridge/node_modules/react-native-reanimated/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
@@ -97,8 +94,6 @@ application
 ADDED from /home/yash/Documents/projects/jalaram_waybridge/android/app/src/main/AndroidManifest.xml:6:5-27:19
 MERGED from /home/yash/Documents/projects/jalaram_waybridge/android/app/src/main/AndroidManifest.xml:6:5-27:19
 MERGED from /home/yash/Documents/projects/jalaram_waybridge/android/app/src/main/AndroidManifest.xml:6:5-27:19
-MERGED from [:react-native-community_datetimepicker] /home/yash/Documents/projects/jalaram_waybridge/node_modules/@react-native-community/datetimepicker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:5-20
-MERGED from [:react-native-community_datetimepicker] /home/yash/Documents/projects/jalaram_waybridge/node_modules/@react-native-community/datetimepicker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:5-20
 MERGED from [com.facebook.react:react-native:0.63.1] /home/yash/.gradle/caches/transforms-2/files-2.1/557ed9b29e158ffe358cb554f1b58ef7/jetified-react-native-0.63.1/AndroidManifest.xml:11:5-20
 MERGED from [com.facebook.react:react-native:0.63.1] /home/yash/.gradle/caches/transforms-2/files-2.1/557ed9b29e158ffe358cb554f1b58ef7/jetified-react-native-0.63.1/AndroidManifest.xml:11:5-20
 MERGED from [com.facebook.soloader:soloader:0.8.2] /home/yash/.gradle/caches/transforms-2/files-2.1/fe63e2f04783b5c513186b2b6e7e30fe/soloader-0.8.2/AndroidManifest.xml:11:5-20
@@ -175,14 +170,8 @@ MERGED from [com.facebook.flipper:flipper-network-plugin:0.37.0] /home/yash/.gra
 MERGED from [com.facebook.flipper:flipper-network-plugin:0.37.0] /home/yash/.gradle/caches/transforms-2/files-2.1/a65d6076e19ec393c728e4dca49568f4/flipper-network-plugin-0.37.0/AndroidManifest.xml:11:5-13:41
 MERGED from [com.facebook.flipper:flipper-fresco-plugin:0.37.0] /home/yash/.gradle/caches/transforms-2/files-2.1/4c2d2364c35e2c493fd776ce36e653fa/flipper-fresco-plugin-0.37.0/AndroidManifest.xml:11:5-13:41
 MERGED from [com.facebook.flipper:flipper-fresco-plugin:0.37.0] /home/yash/.gradle/caches/transforms-2/files-2.1/4c2d2364c35e2c493fd776ce36e653fa/flipper-fresco-plugin-0.37.0/AndroidManifest.xml:11:5-13:41
-MERGED from [:react-native-community_async-storage] /home/yash/Documents/projects/jalaram_waybridge/node_modules/@react-native-community/async-storage/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:react-native-community_async-storage] /home/yash/Documents/projects/jalaram_waybridge/node_modules/@react-native-community/async-storage/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:react-native-community_datetimepicker] /home/yash/Documents/projects/jalaram_waybridge/node_modules/@react-native-community/datetimepicker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-community_datetimepicker] /home/yash/Documents/projects/jalaram_waybridge/node_modules/@react-native-community/datetimepicker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-community_masked-view] /home/yash/Documents/projects/jalaram_waybridge/node_modules/@react-native-community/masked-view/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-community_masked-view] /home/yash/Documents/projects/jalaram_waybridge/node_modules/@react-native-community/masked-view/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:react-native-fs] /home/yash/Documents/projects/jalaram_waybridge/node_modules/react-native-fs/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-fs] /home/yash/Documents/projects/jalaram_waybridge/node_modules/react-native-fs/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-gesture-handler] /home/yash/Documents/projects/jalaram_waybridge/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-gesture-handler] /home/yash/Documents/projects/jalaram_waybridge/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-get-random-values] /home/yash/Documents/projects/jalaram_waybridge/node_modules/react-native-get-random-values/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
@@ -309,7 +298,3 @@ uses-permission#android.permission.ACCESS_WIFI_STATE
 ADDED from [com.facebook.flipper:flipper:0.37.0] /home/yash/.gradle/caches/transforms-2/files-2.1/623174cd4892d9fb924ac44b102b25c0/flipper-0.37.0/AndroidManifest.xml:16:5-76
 	android:name
 		ADDED from [com.facebook.flipper:flipper:0.37.0] /home/yash/.gradle/caches/transforms-2/files-2.1/623174cd4892d9fb924ac44b102b25c0/flipper-0.37.0/AndroidManifest.xml:16:22-73
-uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from [:react-native-fs] /home/yash/Documents/projects/jalaram_waybridge/node_modules/react-native-fs/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:5-81
-	android:name
-		ADDED from [:react-native-fs] /home/yash/Documents/projects/jalaram_waybridge/node_modules/react-native-fs/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:22-78

@@ -3,6 +3,7 @@ import "react-native-get-random-values";
 import {
   ActivityIndicator,
   Animated,
+  Button,
   Dimensions,
   Modal,
   ScrollView,
@@ -22,33 +23,33 @@ import Header from "../Components/Header";
 import InputSelectBox from "../Components/InputSelectBox";
 import InputTextBox from "../Components/InputTextBox";
 import ListContainer from "../Components/ListContainer";
+import ListContainernew from "../Components/ListContainernew";
 import ListItem from "../Components/ListItem";
+import ListItemnew from "../Components/ListItemnew";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { log } from "react-native-reanimated";
 import { v1 as uuidv1 } from "uuid";
 
 const Items = [
   { name: "Bhangar", id: uuidv1() },
-  { name: "yash", id: uuidv1() },
-  { name: "ug", id: uuidv1() },
-  { name: "Bhangar", id: uuidv1() },
-  { name: "yash", id: uuidv1() },
-  { name: "ug", id: uuidv1() },
-  { name: "Bhangar", id: uuidv1() },
-  { name: "yash", id: uuidv1() },
-  { name: "ug", id: uuidv1() },
-  { name: "Bhangar", id: uuidv1() },
-  { name: "yash", id: uuidv1() },
+  { name: "Bhuki", id: uuidv1() },
+  { name: "BID", id: uuidv1() },
+  { name: "BAR", id: uuidv1() },
+  { name: "BUNDLE", id: uuidv1() },
+  { name: "CAPLINE", id: uuidv1() },
+  { name: "CASTING", id: uuidv1() },
+  { name: "CHOL", id: uuidv1() },
 ];
 const Vehicles = [
-  { name: "Bus", id: uuidv1() },
-  { name: "Car", id: uuidv1() },
-  { name: "Train", id: uuidv1() },
-  { name: "Bikee", id: uuidv1() },
-  { name: "BMW", id: uuidv1() },
-  { name: "Ferrari", id: uuidv1() },
-  { name: "Lambo", id: uuidv1() },
-  { name: "splender", id: uuidv1() },
-  { name: "city", id: uuidv1() },
+  { name: "DIPAL", id: uuidv1() },
+  { name: "GJ 10T 237", id: uuidv1() },
+  { name: "GJ 3AU 5078", id: uuidv1() },
+  { name: "GJ 3AU 6574", id: uuidv1() },
+  { name: "GJ 3AV 2974", id: uuidv1() },
+  { name: "GJ 3AX 1856", id: uuidv1() },
+  { name: "GJ 3AX 5656", id: uuidv1() },
+
+  { name: "GJ 3AX 1922", id: uuidv1() },
 ];
 const Charges = [
   { name: "10", id: uuidv1() },
@@ -63,24 +64,25 @@ const Types = [
 ];
 const Cashiors = [
   { name: "NimeshBhai", id: uuidv1() },
-  { name: "NikeshBhai", id: uuidv1() },
+  { name: "ManidhBhai", id: uuidv1() },
   { name: "PrafulBhai", id: uuidv1() },
 ];
 export default function Home() {
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
-  const [seller, setSeller] = useState("Enter Seller Name");
-  const [Purchaser, setPurchaser] = useState("Enter Purchaser Name");
+  const [seller, setSeller] = useState("");
+  const [Purchaser, setPurchaser] = useState("");
   const [items, setitems] = useState("Select-one");
   const [Vehicle, setVehicle] = useState("Select-one");
-  const [Gross, setGross] = useState(0);
-  const [Tare, setTare] = useState(0);
-  const [Net, setNet] = useState(Gross - Tare);
+  const [Gross, setGross] = useState("");
+  const [Tare, setTare] = useState("");
+  const [Net, setNet] = useState(0);
   const [Charge, setCharge] = useState(0);
   const [Type, setType] = useState("Select-one");
   const [Cashior, setCashior] = useState("Select-one");
   const ref1 = createRef();
   const ref2 = createRef();
+  const newref = createRef();
   const Grossref = createRef();
   const Tareref = createRef();
   const Netref = createRef();
@@ -89,19 +91,14 @@ export default function Home() {
   const [activeId, setactiveId] = useState(null);
   const [popupList, setpopupList] = useState(null);
   const [activeTab, setactiveTab] = useState();
-
+  const [dataModel, setdataModel] = useState(false);
   const sellerHandler = (e) => {
     setSeller(e);
   };
   const purchaserHandler = (e) => {
     setPurchaser(e);
   };
-  const itemHandler = (e) => {
-    setitems(e);
-  };
-  const vehicleHandler = (e) => {
-    setVehicle(e);
-  };
+
   const grossHandler = (e) => {
     e == "" || parseInt(e) == NaN ? (e = 0) : (e = parseInt(e));
     e = parseInt(e);
@@ -112,16 +109,11 @@ export default function Home() {
     setTare(e);
   };
   const netHandler = (e) => {
-    setNet(parseInt(Gross) - parseInt(Tare));
-  };
-  const chargeHandler = (e) => {
-    setCharge(e);
-  };
-  const typeHandler = (e) => {
-    setType(e);
-  };
-  const cashiorHandler = (e) => {
-    setCashior(e);
+    if (Gross == "" && Tare == "") {
+      setNet(0);
+    } else {
+      setNet(parseInt(Gross) - parseInt(Tare));
+    }
   };
 
   const getData = () => {
@@ -142,20 +134,20 @@ export default function Home() {
 
   const setStates = ({ activeItem }) => {
     switch (activeTab) {
-      case "_Items":
+      case "Items":
         setitems(activeItem);
         break;
-      case "_Vehicles":
+      case "Vehicles":
         setVehicle(activeItem);
         break;
 
-      case "_Charges":
+      case "Charges":
         setCharge(activeItem);
         break;
-      case "_Types":
+      case "Types":
         setType(activeItem);
         break;
-      case "_Cashior":
+      case "Cashior":
         setCashior(activeItem);
         break;
 
@@ -163,23 +155,35 @@ export default function Home() {
         break;
     }
   };
+  const resetall = () => {
+    setitems("Select-one");
+    setVehicle("Select-one");
+    setType("Select-one");
+    setCashior("Select-one");
+    setPurchaser("");
+    setSeller("");
+    setGross("");
+    setTare("");
+    setNet(0);
+    setCharge(0);
+  };
 
   const JumpToNext = () => {
     switch (activeTab) {
-      case "_Items":
-        setactiveTab("_Vehicles");
+      case "Items":
+        setactiveTab("Vehicles");
         break;
-      case "_Vehicles":
-        setactiveTab("_Gross");
+      case "Vehicles":
+        setactiveTab("Gross");
         break;
 
-      case "_Charges":
-        setactiveTab("_Types");
+      case "Charges":
+        setactiveTab("Types");
         break;
-      case "_Types":
-        setactiveTab("_Cashior");
+      case "Types":
+        setactiveTab("Cashior");
         break;
-      case "_Cashior":
+      case "Cashior":
         setpopupList(null);
         stopAnim();
         setactiveTab(null);
@@ -192,28 +196,28 @@ export default function Home() {
   useEffect(() => {
     console.log(activeTab);
     switch (activeTab) {
-      case "_Items":
+      case "Items":
         startAnim();
         setpopupList(Items);
         break;
-      case "_Vehicles":
+      case "Vehicles":
         startAnim();
         setpopupList(Vehicles);
         break;
-      case "_Gross":
+      case "Gross":
         stopAnim();
         Grossref.current.focus();
         break;
 
-      case "_Charges":
+      case "Charges":
         startAnim();
         setpopupList(Charges);
         break;
-      case "_Types":
+      case "Types":
         startAnim();
         setpopupList(Types);
         break;
-      case "_Cashior":
+      case "Cashior":
         startAnim();
         setpopupList(Cashiors);
         break;
@@ -227,8 +231,29 @@ export default function Home() {
   }, [Gross, Tare]);
 
   const upanim = useRef(new Animated.Value(0)).current;
+  const down = useRef(new Animated.Value(0)).current;
   const fade = useRef(new Animated.Value(0)).current;
 
+  const topAnim = () => {
+    newref.current.focus();
+    Animated.parallel([
+      Animated.timing(down, {
+        toValue: windowHeight * 0.6,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  };
+
+  const stoptopAnim = () => {
+    Animated.parallel([
+      Animated.timing(down, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  };
   const startAnim = () => {
     setmodelVisible(true);
     Animated.parallel([
@@ -265,9 +290,43 @@ export default function Home() {
   };
   return (
     <>
-      <Modal visible={true}>
-        <View>
-          <Text>{getData()}</Text>
+      <Modal transparent={true} animationType={"fade"} visible={dataModel}>
+        <View
+          style={{
+            width: "100%",
+            height: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "rgba(0,0,0,0.4)",
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: "white",
+              width: "80%",
+              padding: 20,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Text>{`Seller : ${getData().Seller}`}</Text>
+            <Text>{`Purchaser : ${getData().Purchaser}`}</Text>
+            <Text>{`Item : ${getData().Item}`}</Text>
+            <Text>{`Vehicle : ${getData().Vehicle}`}</Text>
+            <Text>{`Gross : ${getData().Gross}`}</Text>
+            <Text>{`Tare : ${getData().Tare}`}</Text>
+            <Text>{`Net : ${getData().Net}`}</Text>
+            <Text>{`Charge : ${getData().Charge}`}</Text>
+            <Text>{`Type : ${getData().Type}`}</Text>
+            <Text>{`Cashior : ${getData().Cashior}`}</Text>
+            <Button
+              title={"close"}
+              onPress={() => {
+                resetall();
+                setdataModel(false);
+              }}
+            />
+          </View>
         </View>
       </Modal>
       {modelVisible ? (
@@ -346,6 +405,92 @@ export default function Home() {
           </View>
         )}
       </Animated.View>
+
+      <Animated.View
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: windowHeight * 0.6,
+          top: -windowHeight * 0.6,
+          zIndex: 500,
+          backgroundColor: "rgba(255,255,255,1)",
+          transform: [{ translateY: down }],
+          borderBottomEndRadius: 30,
+          borderBottomStartRadius: 30,
+          elevation: 10,
+        }}
+      >
+        <View
+          style={{
+            marginHorizontal: 30,
+            paddingHorizontal: 5,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            borderColor: "rgba(0,0,0,0.1)",
+            borderWidth: 1,
+            borderRadius: 10,
+          }}
+        >
+          <TextInput
+            ref={newref}
+            style={{
+              textAlignVertical: "center",
+              fontFamily: "Sora-Regular",
+              lineHeight: 18,
+              fontSize: 18,
+              width: "80%",
+            }}
+          />
+          {/* <MaterialIcons name="close" size={24} color={"#364f6b"} /> */}
+        </View>
+
+        <View
+          style={{
+            maxHeight: windowHeight * 0.6 * 0.73,
+          }}
+        >
+          <ListContainernew title={activeTab}>
+            {Items.map(({ name, id }) => {
+              return (
+                <ListItemnew
+                  itemName={name}
+                  activeId={activeId}
+                  id={id}
+                  key={id}
+                  click={(obj) => {
+                    console.log(obj);
+                    setStates(obj);
+                    setactiveId(obj.activeId);
+                  }}
+                />
+              );
+            })}
+          </ListContainernew>
+        </View>
+
+        <View
+          style={{
+            width: "100%",
+
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <AnimatedButton
+            height={45}
+            width={150}
+            click={() => {
+              setpopupList(null);
+              console.log(activeTab);
+              JumpToNext();
+            }}
+            color={"#a6e3e9"}
+            title={"Next"}
+          />
+        </View>
+      </Animated.View>
+
       <ScrollView
         ref={(scroller) => {
           setScrollRef(scroller);
@@ -363,6 +508,7 @@ export default function Home() {
           <Header />
           <CardContainer color={"#a6e3e9"}>
             <InputTextBox
+              Value={seller}
               textHandler={sellerHandler}
               returnKeyType={"next"}
               blurOnSubmit={false}
@@ -374,24 +520,26 @@ export default function Home() {
               }}
             />
             <InputTextBox
+              Value={Purchaser}
               textHandler={purchaserHandler}
               title="purchaser"
               subtitle={"Enter Name"}
               ref={ref2}
               onSubmitEditing={() => {
-                setactiveTab("_Items");
+                setactiveTab("Items");
               }}
             />
             <InputSelectBox
               click={() => {
-                setactiveTab("_Items");
+                //  setactiveTab("Items");
+                topAnim();
               }}
               title="Items"
               subtitle={items}
             />
             <InputSelectBox
               click={() => {
-                setactiveTab("_Vehicles");
+                setactiveTab("Vehicles");
               }}
               title="Vehicle-name"
               subtitle={Vehicle}
@@ -400,6 +548,7 @@ export default function Home() {
 
           <CardContainer color={"#bbded6"}>
             <InputTextBox
+              Value={Gross.toString()}
               keyboardType={"numeric"}
               textHandler={grossHandler}
               title="Gross"
@@ -413,6 +562,7 @@ export default function Home() {
               }}
             />
             <InputTextBox
+              Value={Tare.toString()}
               keyboardType={"numeric"}
               textHandler={tareHandler}
               title="Tare"
@@ -422,7 +572,7 @@ export default function Home() {
               returnKeyType={"next"}
               blurOnSubmit={true}
               onSubmitEditing={() => {
-                setactiveTab("_Charges");
+                setactiveTab("Charges");
               }}
             />
             <InputTextBox
@@ -434,21 +584,21 @@ export default function Home() {
           <CardContainer color={"#fae3d9"}>
             <InputSelectBox
               click={() => {
-                setactiveTab("_Charges");
+                setactiveTab("Charges");
               }}
               title={"Charge"}
               subtitle={Charge}
             />
             <InputSelectBox
               click={() => {
-                setactiveTab("_Types");
+                setactiveTab("Types");
               }}
               title={"Types"}
               subtitle={Type}
             />
             <InputSelectBox
               click={() => {
-                setactiveTab("_Cashior");
+                setactiveTab("Cashior");
               }}
               title={"Cashior"}
               subtitle={Cashior}
@@ -465,6 +615,7 @@ export default function Home() {
             <AnimatedButton
               click={() => {
                 console.log(getData());
+                setdataModel(true);
               }}
               width={"80%"}
               color={"rgba(54, 79, 107,0.7)"}

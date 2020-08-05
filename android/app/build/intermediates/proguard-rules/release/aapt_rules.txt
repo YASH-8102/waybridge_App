@@ -1,10 +1,10 @@
-# Referenced at /home/yash/Documents/projects/jalaram_waybridge/android/app/build/intermediates/merged_manifests/release/arm64-v8a/AndroidManifest.xml:14
+# Referenced at /home/yash/Documents/projects/jalaram_waybridge/android/app/build/intermediates/merged_manifests/release/arm64-v8a/AndroidManifest.xml:13
 -keep class androidx.core.app.CoreComponentFactory { <init>(); }
-# Referenced at /home/yash/Documents/projects/jalaram_waybridge/android/app/build/intermediates/merged_manifests/release/arm64-v8a/AndroidManifest.xml:35
+# Referenced at /home/yash/Documents/projects/jalaram_waybridge/android/app/build/intermediates/merged_manifests/release/arm64-v8a/AndroidManifest.xml:34
 -keep class com.facebook.react.devsupport.DevSettingsActivity { <init>(); }
-# Referenced at /home/yash/Documents/projects/jalaram_waybridge/android/app/build/intermediates/merged_manifests/release/arm64-v8a/AndroidManifest.xml:22
+# Referenced at /home/yash/Documents/projects/jalaram_waybridge/android/app/build/intermediates/merged_manifests/release/arm64-v8a/AndroidManifest.xml:21
 -keep class com.waybridge.MainActivity { <init>(); }
-# Referenced at /home/yash/Documents/projects/jalaram_waybridge/android/app/build/intermediates/merged_manifests/release/arm64-v8a/AndroidManifest.xml:14
+# Referenced at /home/yash/Documents/projects/jalaram_waybridge/android/app/build/intermediates/merged_manifests/release/arm64-v8a/AndroidManifest.xml:13
 -keep class com.waybridge.MainApplication { <init>(); }
 # Referenced at /home/yash/.gradle/caches/transforms-2/files-2.1/1cb9b9ea592aa2ea85233be252327dcf/appcompat-1.1.0/res/layout-watch-v20/abc_alert_dialog_title_material.xml:53
 # Referenced at /home/yash/.gradle/caches/transforms-2/files-2.1/863e0c3c6716935cd3657ad638fd992d/material-1.1.0/res/layout/mtrl_alert_dialog_title.xml:41
