@@ -32,7 +32,7 @@ const Header = () => {
             color: "rgba(54, 79, 107,1)",
           }}
         >
-          Date : 10/8/2020
+          {` Date : ${new Date().getDate()}-${new Date().getMonth()}-${new Date().getFullYear()} `}
         </Text>
       </View>
     </View>

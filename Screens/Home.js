@@ -92,7 +92,7 @@ export default function Home() {
   const newref = createRef();
   const Grossref = createRef();
   const Tareref = createRef();
-  const Netref = createRef();
+
   const [ScrollRef, setScrollRef] = useState(null);
   const [modelVisible, setmodelVisible] = useState(false);
   const [activeId, setactiveId] = useState(null);
@@ -100,6 +100,8 @@ export default function Home() {
   const [activeTab, setactiveTab] = useState();
   const [dataModel, setdataModel] = useState(false);
   const [dropItems, setdropItems] = useState(Items);
+  const [dropList, setdropList] = useState(null);
+  const [searchValue, setsearchValue] = useState("");
   const sellerHandler = (e) => {
     setSeller(e);
   };
@@ -117,7 +119,7 @@ export default function Home() {
     setTare(e);
   };
   const netHandler = (e) => {
-    if (Gross == "" && Tare == "") {
+    if (Gross == "" || Tare == "") {
       setNet(0);
     } else {
       setNet(parseInt(Gross) - parseInt(Tare));
@@ -144,6 +146,14 @@ export default function Home() {
     switch (activeTab) {
       case "Items":
         setitems(activeItem);
+
+        if (
+          !Items.find((e) => {
+            return e.name === activeItem;
+          })
+        ) {
+          Items.push({ id: uuidv1(), name: activeItem });
+        }
         break;
       case "Vehicles":
         setVehicle(activeItem);
@@ -180,9 +190,11 @@ export default function Home() {
     switch (activeTab) {
       case "Items":
         setactiveTab("Vehicles");
+        setsearchValue("");
         break;
       case "Vehicles":
         setactiveTab("Gross");
+        setsearchValue("");
         break;
 
       case "Charges":
@@ -205,15 +217,18 @@ export default function Home() {
     console.log(activeTab);
     switch (activeTab) {
       case "Items":
-        startAnim();
-        setpopupList(Items);
+        topAnim();
+        setdropItems(Items);
+        setdropList(Items);
+
         break;
       case "Vehicles":
-        startAnim();
-        setpopupList(Vehicles);
+        topAnim();
+        setdropItems(Vehicles);
+        setdropList(Vehicles);
         break;
       case "Gross":
-        stopAnim();
+        stoptopAnim();
         Grossref.current.focus();
         break;
 
@@ -243,9 +258,10 @@ export default function Home() {
   const fade = useRef(new Animated.Value(0)).current;
 
   const topAnim = () => {
-    StatusBar.setBackgroundColor("rgba(166, 227, 233,0.7)");
-
     newref.current.focus();
+    StatusBar.setBackgroundColor("rgba(166, 227, 233,0.7)");
+    setmodelVisible(true);
+
     Animated.parallel([
       Animated.timing(down, {
         toValue: windowHeight * 0.6,
@@ -253,12 +269,19 @@ export default function Home() {
         useNativeDriver: true,
         easing: Easing.bezier(0.87, 0, 0.13, 1),
       }),
+      Animated.timing(fade, {
+        toValue: 1,
+        duration: 200,
+        useNativeDriver: true,
+      }),
     ]).start();
   };
 
   const stoptopAnim = () => {
+    setactiveTab("");
     newref.current.blur();
     StatusBar.setBackgroundColor("rgba(255,255,255,0.2)");
+    setsearchValue("");
     Animated.parallel([
       Animated.timing(down, {
         toValue: -60,
@@ -266,7 +289,9 @@ export default function Home() {
         useNativeDriver: true,
         easing: Easing.bezier(0.87, 0, 0.13, 1),
       }),
-    ]).start();
+    ]).start(() => {
+      setmodelVisible(false);
+    });
   };
   const startAnim = () => {
     setmodelVisible(true);
@@ -348,6 +373,7 @@ export default function Home() {
           fade={fade}
           press={() => {
             stopAnim();
+            stoptopAnim();
           }}
         />
       ) : null}
@@ -424,7 +450,7 @@ export default function Home() {
         style={{
           position: "absolute",
           width: "100%",
-          height: windowHeight * 0.59,
+          height: windowHeight * 0.57,
           top: -windowHeight * 0.6,
           zIndex: 500,
           backgroundColor: "rgba(255,255,255,1)",
@@ -438,7 +464,7 @@ export default function Home() {
         <View
           style={{
             width: "100%",
-            height: "85%",
+            height: "80%",
             justifyContent: "flex-start",
           }}
         >
@@ -458,27 +484,37 @@ export default function Home() {
           >
             <MaterialIcons name="search" size={25} color={"#000"} />
             <TextInput
+              value={searchValue.toString()}
+              onSubmitEditing={() => {
+                setdropItems([]);
+                setmodelVisible(true);
+                JumpToNext();
+                setsearchValue("");
+              }}
               placeholder={"Search Items"}
               onChangeText={(e) => {
-                let yn = [...Items].filter((i) => {
-                  return (
-                    i.name.toLowerCase().startsWith(e.toLowerCase()) ||
-                    i.name.toLowerCase().includes(e.toLowerCase())
-                  );
-                });
-                console.log(yn);
-                if (yn.length == 0) {
-                  setdropItems([{ id: uuidv1(), name: e }]);
+                setsearchValue(e);
+                if (e === "") {
+                  setdropItems(dropList);
                 } else {
-                  setdropItems(yn);
+                  let yn = [...dropList].filter((i) => {
+                    return (
+                      i.name.toLowerCase().startsWith(e.toLowerCase()) ||
+                      i.name.toLowerCase().includes(e.toLowerCase())
+                    );
+                  });
+                  console.log(yn);
+                  if (yn.length == 0) {
+                    setdropItems([{ id: uuidv1(), name: e }]);
+                  } else {
+                    setdropItems(yn);
+                  }
                 }
               }}
               ref={newref}
               style={{
-                textAlignVertical: "center",
                 fontFamily: "Sora-Regular",
-                lineHeight: 18,
-                fontSize: 18,
+
                 width: "80%",
                 color: "black",
               }}
@@ -487,42 +523,56 @@ export default function Home() {
               onPress={() => {
                 newref.current.blur();
                 stoptopAnim();
+                setactiveTab(null);
               }}
             >
               <MaterialIcons name="close" size={25} color={"#000"} />
             </TouchableWithoutFeedback>
           </View>
 
-          <View
-            style={{
-              paddingTop: 10,
-              height: "85%",
-            }}
-          >
-            <ListContainernew title={activeTab}>
-              {dropItems.map(({ name, id }) => {
-                return (
-                  <ListItemnew
-                    itemName={name}
-                    activeId={activeId}
-                    id={id}
-                    key={id}
-                    click={(obj) => {
-                      console.log(obj);
-                      setStates(obj);
-                      setactiveId(obj.activeId);
-                    }}
-                  />
-                );
-              })}
-            </ListContainernew>
-          </View>
+          {dropItems ? (
+            <View
+              style={{
+                paddingTop: 10,
+                height: "85%",
+              }}
+            >
+              <ListContainernew title={activeTab}>
+                {dropItems.map(({ name, id }) => {
+                  return (
+                    <ListItemnew
+                      itemName={name}
+                      activeId={activeId}
+                      id={id}
+                      key={id}
+                      click={(obj) => {
+                        console.log(obj);
+                        setStates(obj);
+                        setactiveId(obj.activeId);
+                      }}
+                    />
+                  );
+                })}
+              </ListContainernew>
+            </View>
+          ) : (
+            <View
+              style={{
+                width: "100%",
+                height: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <ActivityIndicator size={"large"} color={"#a6e3e9"} />
+            </View>
+          )}
         </View>
 
         <View
           style={{
             width: "100%",
-            height: "15%",
+            height: "20%",
 
             justifyContent: "center",
             alignItems: "center",
@@ -532,8 +582,8 @@ export default function Home() {
             height={50}
             width={300}
             click={() => {
-              setpopupList(null);
-              console.log(activeTab);
+              setdropItems([]);
+              setmodelVisible(true);
               JumpToNext();
             }}
             color={"#a6e3e9"}
@@ -582,8 +632,7 @@ export default function Home() {
             />
             <InputSelectBox
               click={() => {
-                //  setactiveTab("Items");
-                topAnim();
+                setactiveTab("Items");
               }}
               title="Items"
               subtitle={items}
