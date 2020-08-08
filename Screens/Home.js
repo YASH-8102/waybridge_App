@@ -5,8 +5,10 @@ import {
   Animated,
   Button,
   Dimensions,
+  Easing,
   Modal,
   ScrollView,
+  StatusBar,
   StyleSheet,
   Text,
   TextInput,
@@ -27,7 +29,6 @@ import ListContainernew from "../Components/ListContainernew";
 import ListItem from "../Components/ListItem";
 import ListItemnew from "../Components/ListItemnew";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import { log } from "react-native-reanimated";
 import { v1 as uuidv1 } from "uuid";
 
 const Items = [
@@ -36,6 +37,12 @@ const Items = [
   { name: "BID", id: uuidv1() },
   { name: "BAR", id: uuidv1() },
   { name: "BUNDLE", id: uuidv1() },
+  { name: "CAPLINE", id: uuidv1() },
+  { name: "CASTING", id: uuidv1() },
+  { name: "CHOL", id: uuidv1() },
+  { name: "CAPLINE", id: uuidv1() },
+  { name: "CASTING", id: uuidv1() },
+  { name: "CHOL", id: uuidv1() },
   { name: "CAPLINE", id: uuidv1() },
   { name: "CASTING", id: uuidv1() },
   { name: "CHOL", id: uuidv1() },
@@ -92,6 +99,7 @@ export default function Home() {
   const [popupList, setpopupList] = useState(null);
   const [activeTab, setactiveTab] = useState();
   const [dataModel, setdataModel] = useState(false);
+  const [dropItems, setdropItems] = useState(Items);
   const sellerHandler = (e) => {
     setSeller(e);
   };
@@ -231,26 +239,32 @@ export default function Home() {
   }, [Gross, Tare]);
 
   const upanim = useRef(new Animated.Value(0)).current;
-  const down = useRef(new Animated.Value(0)).current;
+  const down = useRef(new Animated.Value(-60)).current;
   const fade = useRef(new Animated.Value(0)).current;
 
   const topAnim = () => {
+    StatusBar.setBackgroundColor("rgba(166, 227, 233,0.7)");
+
     newref.current.focus();
     Animated.parallel([
       Animated.timing(down, {
         toValue: windowHeight * 0.6,
         duration: 200,
         useNativeDriver: true,
+        easing: Easing.bezier(0.87, 0, 0.13, 1),
       }),
     ]).start();
   };
 
   const stoptopAnim = () => {
+    newref.current.blur();
+    StatusBar.setBackgroundColor("rgba(255,255,255,0.2)");
     Animated.parallel([
       Animated.timing(down, {
-        toValue: 0,
+        toValue: -60,
         duration: 200,
         useNativeDriver: true,
+        easing: Easing.bezier(0.87, 0, 0.13, 1),
       }),
     ]).start();
   };
@@ -410,7 +424,7 @@ export default function Home() {
         style={{
           position: "absolute",
           width: "100%",
-          height: windowHeight * 0.6,
+          height: windowHeight * 0.59,
           top: -windowHeight * 0.6,
           zIndex: 500,
           backgroundColor: "rgba(255,255,255,1)",
@@ -418,68 +432,105 @@ export default function Home() {
           borderBottomEndRadius: 30,
           borderBottomStartRadius: 30,
           elevation: 10,
+          justifyContent: "space-between",
         }}
       >
         <View
           style={{
-            marginHorizontal: 30,
-            paddingHorizontal: 5,
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            borderColor: "rgba(0,0,0,0.1)",
-            borderWidth: 1,
-            borderRadius: 10,
+            width: "100%",
+            height: "85%",
+            justifyContent: "flex-start",
           }}
         >
-          <TextInput
-            ref={newref}
+          <View
             style={{
-              textAlignVertical: "center",
-              fontFamily: "Sora-Regular",
-              lineHeight: 18,
-              fontSize: 18,
-              width: "80%",
+              height: 55,
+              backgroundColor: "#a6e3e9",
+              marginHorizontal: 0,
+              paddingHorizontal: 30,
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              // borderColor: "rgba(0,0,0,0.1)",
+              // borderWidth: 1,
+              // borderRadius: 10,
             }}
-          />
-          {/* <MaterialIcons name="close" size={24} color={"#364f6b"} /> */}
-        </View>
+          >
+            <MaterialIcons name="search" size={25} color={"#000"} />
+            <TextInput
+              placeholder={"Search Items"}
+              onChangeText={(e) => {
+                let yn = [...Items].filter((i) => {
+                  return (
+                    i.name.toLowerCase().startsWith(e.toLowerCase()) ||
+                    i.name.toLowerCase().includes(e.toLowerCase())
+                  );
+                });
+                console.log(yn);
+                if (yn.length == 0) {
+                  setdropItems([{ id: uuidv1(), name: e }]);
+                } else {
+                  setdropItems(yn);
+                }
+              }}
+              ref={newref}
+              style={{
+                textAlignVertical: "center",
+                fontFamily: "Sora-Regular",
+                lineHeight: 18,
+                fontSize: 18,
+                width: "80%",
+                color: "black",
+              }}
+            />
+            <TouchableWithoutFeedback
+              onPress={() => {
+                newref.current.blur();
+                stoptopAnim();
+              }}
+            >
+              <MaterialIcons name="close" size={25} color={"#000"} />
+            </TouchableWithoutFeedback>
+          </View>
 
-        <View
-          style={{
-            maxHeight: windowHeight * 0.6 * 0.73,
-          }}
-        >
-          <ListContainernew title={activeTab}>
-            {Items.map(({ name, id }) => {
-              return (
-                <ListItemnew
-                  itemName={name}
-                  activeId={activeId}
-                  id={id}
-                  key={id}
-                  click={(obj) => {
-                    console.log(obj);
-                    setStates(obj);
-                    setactiveId(obj.activeId);
-                  }}
-                />
-              );
-            })}
-          </ListContainernew>
+          <View
+            style={{
+              paddingTop: 10,
+              height: "85%",
+            }}
+          >
+            <ListContainernew title={activeTab}>
+              {dropItems.map(({ name, id }) => {
+                return (
+                  <ListItemnew
+                    itemName={name}
+                    activeId={activeId}
+                    id={id}
+                    key={id}
+                    click={(obj) => {
+                      console.log(obj);
+                      setStates(obj);
+                      setactiveId(obj.activeId);
+                    }}
+                  />
+                );
+              })}
+            </ListContainernew>
+          </View>
         </View>
 
         <View
           style={{
             width: "100%",
+            height: "15%",
 
             justifyContent: "center",
             alignItems: "center",
           }}
         >
           <AnimatedButton
-            height={45}
-            width={150}
+            height={50}
+            width={300}
             click={() => {
               setpopupList(null);
               console.log(activeTab);

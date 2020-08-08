@@ -8,7 +8,7 @@ const App = () => {
   StatusBar.setTranslucent(false);
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar animated={true} barStyle="dark-content" />
       <Navigator />
     </>
   );

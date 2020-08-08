@@ -1,6 +1,6 @@
-import {Dimensions} from 'react-native';
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+import { Dimensions } from "react-native";
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 const bannerWidth = windowWidth;
 const bannerHeight = (windowWidth * 9) / 7;
 const top = bannerHeight - Math.floor((windowHeight * 60) / 100);
@@ -35,5 +35,4 @@ const Values = {
   logoHeight,
   logotop,
 };
-console.log(JSON.stringify(Values));
 export default Values;

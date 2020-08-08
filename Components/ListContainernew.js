@@ -7,7 +7,10 @@ import { ScrollView } from "react-native-gesture-handler";
 const ListContainernew = (props) => {
   return (
     <View style={{ marginHorizontal: 30 }}>
-      <ScrollView style={{ marginVertical: 0, maxHeight: "100%" }}>
+      <ScrollView
+        keyboardShouldPersistTaps="handled"
+        style={{ marginVertical: 0, maxHeight: "100%" }}
+      >
         {props.children}
       </ScrollView>
     </View>
