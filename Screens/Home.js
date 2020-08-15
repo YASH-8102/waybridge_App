@@ -75,23 +75,19 @@ const Cashiors = [
   { name: "PrafulBhai", id: uuidv1() },
 ];
 export default function Home() {
-  const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
+
+  //States
   const [seller, setSeller] = useState("");
   const [Purchaser, setPurchaser] = useState("");
-  const [items, setitems] = useState("Select-one");
-  const [Vehicle, setVehicle] = useState("Select-one");
+  const [items, setitems] = useState("");
+  const [Vehicle, setVehicle] = useState("");
   const [Gross, setGross] = useState("");
   const [Tare, setTare] = useState("");
   const [Net, setNet] = useState(0);
   const [Charge, setCharge] = useState(0);
-  const [Type, setType] = useState("Select-one");
-  const [Cashior, setCashior] = useState("Select-one");
-  const ref1 = createRef();
-  const ref2 = createRef();
-  const newref = createRef();
-  const Grossref = createRef();
-  const Tareref = createRef();
+  const [Type, setType] = useState("");
+  const [Cashior, setCashior] = useState("");
 
   const [ScrollRef, setScrollRef] = useState(null);
   const [modelVisible, setmodelVisible] = useState(false);
@@ -102,6 +98,19 @@ export default function Home() {
   const [dropItems, setdropItems] = useState(Items);
   const [dropList, setdropList] = useState(null);
   const [searchValue, setsearchValue] = useState("");
+
+  //Refs
+  const ref1 = createRef();
+  const ref2 = createRef();
+  const newref = createRef();
+  const Grossref = createRef();
+  const Tareref = createRef();
+
+  //Animation Refs
+  const upanim = useRef(new Animated.Value(0)).current;
+  const down = useRef(new Animated.Value(-60)).current;
+  const fade = useRef(new Animated.Value(0)).current;
+
   const sellerHandler = (e) => {
     setSeller(e);
   };
@@ -142,7 +151,32 @@ export default function Home() {
     return obj;
   };
 
-  const onSubmitCheck = () => {};
+  const onSubmitCheck = () => {
+    const obj = {
+      Seller: seller,
+      Purchaser: Purchaser,
+      Item: items,
+      Vehicles: Vehicle,
+      Gross: Gross,
+      Tare: Tare,
+      Net: Net,
+      Charges: Charge,
+      Types: Type,
+      Cashior: Cashior,
+    };
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        const element = obj[key];
+        console.log(element);
+        if (!element) {
+          console.log(key);
+
+          setactiveTab(key);
+          return;
+        }
+      }
+    }
+  };
   const setStates = ({ activeItem }) => {
     switch (activeTab) {
       case "Items":
@@ -232,16 +266,28 @@ export default function Home() {
         break;
     }
   };
+
+  //effect when active tab changes
   useEffect(() => {
     console.log(activeTab);
     switch (activeTab) {
+      case "Seller":
+        ScrollRef.scrollTo({ y: 0, animated: true });
+        ref1.current.focus();
+        break;
+
+      case "Purchaser":
+        ScrollRef.scrollTo({ y: 0, animated: true });
+        ref2.current.focus();
+        break;
       case "Items":
+        ScrollRef.scrollTo({ y: 0, animated: true });
         topAnim();
         setdropItems(Items);
         setdropList(Items);
-
         break;
       case "Vehicles":
+        ScrollRef.scrollTo({ y: 0, animated: true });
         topAnim();
         setdropItems(Vehicles);
         setdropList(Vehicles);
@@ -251,17 +297,25 @@ export default function Home() {
         Grossref.current.focus();
         break;
 
+      case "Tare":
+        ScrollRef.scrollTo({ y: 240, animated: true });
+        Tareref.current.focus();
+        break;
+
       case "Charges":
+        ScrollRef.scrollTo({ y: 240, animated: true });
         startAnim();
         setpopupList(Charges);
         break;
       case "Types":
+        ScrollRef.scrollTo({ y: 240, animated: true });
         topAnim();
         setdropItems(Types);
         setdropList(Types);
 
         break;
       case "Cashior":
+        ScrollRef.scrollTo({ y: 240, animated: true });
         setpopupList(Cashiors);
         startAnim();
 
@@ -271,14 +325,12 @@ export default function Home() {
         break;
     }
   }, [activeTab, modelVisible]);
+
   useEffect(() => {
     netHandler();
   }, [Gross, Tare]);
 
-  const upanim = useRef(new Animated.Value(0)).current;
-  const down = useRef(new Animated.Value(-60)).current;
-  const fade = useRef(new Animated.Value(0)).current;
-
+  //SearchBAr Animation
   const topAnim = () => {
     newref.current.focus();
     StatusBar.setBackgroundColor("rgba(166, 227, 233,0.7)");
@@ -298,7 +350,6 @@ export default function Home() {
       }),
     ]).start();
   };
-
   const stoptopAnim = () => {
     setactiveTab("");
     newref.current.blur();
@@ -315,6 +366,8 @@ export default function Home() {
       setmodelVisible(false);
     });
   };
+
+  //Bottom to up animation
   const startAnim = () => {
     setmodelVisible(true);
     Animated.parallel([
@@ -349,6 +402,7 @@ export default function Home() {
       setmodelVisible(false);
     });
   };
+
   return (
     <>
       <Modal transparent={true} animationType={"fade"} visible={dataModel}>
@@ -399,6 +453,8 @@ export default function Home() {
           }}
         />
       ) : null}
+
+      {/* Bottom animated view */}
       <Animated.View
         style={{
           position: "absolute",
@@ -468,6 +524,7 @@ export default function Home() {
         )}
       </Animated.View>
 
+      {/* Top animated view */}
       <Animated.View
         style={{
           position: "absolute",
@@ -614,6 +671,7 @@ export default function Home() {
         </View>
       </Animated.View>
 
+      {/* Main Container view */}
       <ScrollView
         ref={(scroller) => {
           setScrollRef(scroller);
@@ -629,6 +687,7 @@ export default function Home() {
           }}
         >
           <Header />
+
           <CardContainer color={"#a6e3e9"}>
             <InputTextBox
               Value={seller}
@@ -643,6 +702,7 @@ export default function Home() {
               }}
             />
             <InputTextBox
+              empty={true}
               Value={Purchaser}
               textHandler={purchaserHandler}
               title="purchaser"
@@ -657,14 +717,14 @@ export default function Home() {
                 setactiveTab("Items");
               }}
               title="Items"
-              subtitle={items}
+              subtitle={items ? items : "Select-One"}
             />
             <InputSelectBox
               click={() => {
                 setactiveTab("Vehicles");
               }}
               title="Vehicle-name"
-              subtitle={Vehicle}
+              subtitle={Vehicle ? Vehicle : "Select-One"}
             />
           </CardContainer>
 
@@ -703,29 +763,32 @@ export default function Home() {
               editable={false}
             />
           </CardContainer>
+
           <CardContainer color={"#fae3d9"}>
             <InputSelectBox
               click={() => {
                 setactiveTab("Charges");
               }}
               title={"Charge"}
-              subtitle={Charge}
+              subtitle={Charge ? Charge : "Select-One"}
             />
             <InputSelectBox
               click={() => {
                 setactiveTab("Types");
               }}
               title={"Types"}
-              subtitle={Type}
+              subtitle={Type ? Type : "Select-One"}
             />
             <InputSelectBox
               click={() => {
                 setactiveTab("Cashior");
               }}
               title={"Cashior"}
-              subtitle={Cashior}
+              subtitle={Cashior ? Cashior : "Select-One"}
             />
           </CardContainer>
+
+          {/* Submit Container */}
           <View
             style={{
               marginBottom: 10,
@@ -737,7 +800,8 @@ export default function Home() {
             <AnimatedButton
               click={() => {
                 console.log(getData());
-                setdataModel(true);
+                onSubmitCheck();
+                // setdataModel(true);
               }}
               width={"80%"}
               color={"rgba(54, 79, 107,0.7)"}
