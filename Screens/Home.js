@@ -142,6 +142,7 @@ export default function Home() {
     return obj;
   };
 
+  const onSubmitCheck = () => {};
   const setStates = ({ activeItem }) => {
     switch (activeTab) {
       case "Items":
@@ -157,6 +158,13 @@ export default function Home() {
         break;
       case "Vehicles":
         setVehicle(activeItem);
+        if (
+          !Vehicles.find((e) => {
+            return e.name === activeItem;
+          })
+        ) {
+          Vehicles.push({ id: uuidv1(), name: activeItem });
+        }
         break;
 
       case "Charges":
@@ -164,6 +172,13 @@ export default function Home() {
         break;
       case "Types":
         setType(activeItem);
+        if (
+          !Types.find((e) => {
+            return e.name === activeItem;
+          })
+        ) {
+          Types.push({ id: uuidv1(), name: activeItem });
+        }
         break;
       case "Cashior":
         setCashior(activeItem);
@@ -198,10 +213,14 @@ export default function Home() {
         break;
 
       case "Charges":
+        setpopupList(null);
+        stopAnim();
         setactiveTab("Types");
         break;
       case "Types":
+        stoptopAnim();
         setactiveTab("Cashior");
+
         break;
       case "Cashior":
         setpopupList(null);
@@ -237,12 +256,15 @@ export default function Home() {
         setpopupList(Charges);
         break;
       case "Types":
-        startAnim();
-        setpopupList(Types);
+        topAnim();
+        setdropItems(Types);
+        setdropList(Types);
+
         break;
       case "Cashior":
-        startAnim();
         setpopupList(Cashiors);
+        startAnim();
+
         break;
 
       default:
